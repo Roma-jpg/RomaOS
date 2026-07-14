@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0a0c10"/><stop offset="1" stop-color="#101820"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <g fill="none" stroke="#b8ff6a" stroke-opacity=".55">
+    <rect x="110" y="120" width="600" height="430" rx="28"/><path d="M110 185h600"/><circle cx="152" cy="152" r="8"/><circle cx="180" cy="152" r="8"/><circle cx="208" cy="152" r="8"/>
+    <rect x="175" y="245" width="470" height="245" rx="14"/><path d="M780 210h300v250H780z"/><path d="M820 515h220M860 460v55m140-55v55"/>
+  </g>
+  <path d="M220 435c75-160 155 80 230-70s130 85 165-55" fill="none" stroke="#b8ff6a" stroke-width="8" stroke-linecap="round" filter="url(#g)"/>
+  <g font-family="monospace"><text x="110" y="90" fill="#b8ff6a" font-size="22">OLED PAINTER / WEB → ESP32</text><text x="110" y="640" fill="#68717d" font-size="16">BROWSER INPUT / HTTP / SSD1306 OUTPUT</text><text x="830" y="330" fill="#edf3f7" font-size="36" font-weight="700">128 × 64</text><text x="830" y="370" fill="#8b929e" font-size="18">LIVE CANVAS</text></g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#090c10"/><stop offset="1" stop-color="#14171d"/></linearGradient><filter id="g"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <g stroke="#b8ff6a" fill="none" stroke-opacity=".45">
+    <circle cx="365" cy="360" r="175"/><circle cx="365" cy="360" r="128"/><circle cx="365" cy="360" r="78"/>
+    <path d="M540 360h190m-20-55 55 55-55 55"/>
+    <rect x="770" y="210" width="250" height="300" rx="28"/>
+    <rect x="812" y="260" width="166" height="106" rx="12"/>
+    <path d="M820 425h150M820 456h95"/>
+  </g>
+  <path d="M365 252c58 0 105 47 105 105s-47 105-105 105" fill="none" stroke="#b8ff6a" stroke-width="5" filter="url(#g)"/>
+  <g font-family="monospace"><text x="90" y="90" fill="#b8ff6a" font-size="22">KEYFLOW / NFC + HID WORKFLOW</text><text x="90" y="640" fill="#68717d" font-size="16">READ / EXPORT / ORGANIZE / VERIFY</text><text x="795" y="565" fill="#edf3f7" font-size="44" font-weight="700">UID → DATA</text></g>
+</svg>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#090b0f" />
+  <meta name="description" content="Кошелев Роман - разработчик и инженер. Web-интерфейсы, системные инструменты, автоматизация и embedded-прототипы." />
+  <meta property="og:title" content="Кошелев Роман - разработчик и инженер" />
+  <meta property="og:description" content="Интерфейсы, автоматизация, embedded-разработка и рабочие технические прототипы." />
+  <meta property="og:type" content="website" />
+  <title>Кошелев Роман - разработчик и инженер</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090b0f'/%3E%3Cpath d='M16 15h21c8 0 13 5 13 12 0 5-3 9-8 11l10 11H39L29 39v10H16V15zm13 10v7h7c2 0 4-1 4-4s-2-3-4-3h-7z' fill='%23b8ff6a'/%3E%3C/svg%3E" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Кошелев Роман",
+    "jobTitle": "Разработчик и инженер",
+    "email": "mailto:rkoshelev2001@gmail.com",
+    "url": "https://github.com/Roma-jpg",
+    "sameAs": ["https://github.com/Roma-jpg"]
+  }
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="signal-field" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor-light" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress"></span></div>
+
+  <div class="boot-screen" id="boot-screen" aria-live="polite">
+    <div class="boot-terminal">
+      <div class="boot-logo">R/OS</div>
+      <div class="boot-identity">KOSHELEV ROMAN / PERSONAL PORTFOLIO</div>
+      <div id="boot-log"></div>
+      <button class="skip-boot" id="skip-boot">пропустить загрузку</button>
+    </div>
+  </div>
+
+  <header class="topbar shell">
+    <a class="brand magnetic" href="#top" aria-label="К началу страницы">
+      <span class="brand-mark">R/</span>
+      <span class="brand-copy">КОШЕЛЕВ РОМАН <small>DEVELOPER + ENGINEER</small></span>
+    </a>
+
+    <nav class="top-nav" aria-label="Навигация">
+      <a href="#projects">Портфолио</a>
+      <a href="mailto:rkoshelev2001@gmail.com">Почта</a>
+      <a href="https://github.com/Roma-jpg" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+
+    <button class="terminal-button magnetic" id="open-terminal" type="button">
+      <span class="terminal-button-dot"></span>
+      <span>Терминал</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-watermark" aria-hidden="true">KR</div>
+
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> OPEN TO INTERESTING BUILDS / KAZAN</div>
+        <p class="hero-role">РАЗРАБОТЧИК <span>/</span> ИНЖЕНЕР <span>/</span> СОЗДАТЕЛЬ СИСТЕМ</p>
+
+        <h1 id="hero-title">
+          <span class="hero-name">
+            <span class="hero-surname">КОШЕЛЕВ</span>
+            <span class="hero-firstname">РОМАН</span>
+          </span>
+          <span class="hero-statement">Превращаю идеи в <span class="scramble" data-text="работающие системы">работающие системы</span>.</span>
+        </h1>
+
+        <p class="hero-intro">
+          Проектирую web-интерфейсы, пишу системные инструменты и собираю embedded-прототипы. Соединяю код, железо и понятный UX в одном рабочем решении.
+        </p>
+
+        <div class="hero-proof" aria-label="Основные направления">
+          <div><span>01</span><strong>WEB & UI</strong><small>интерфейсы и визуализация</small></div>
+          <div><span>02</span><strong>SYSTEM TOOLS</strong><small>автоматизация и нативный софт</small></div>
+          <div><span>03</span><strong>EMBEDDED</strong><small>ESP32, протоколы и устройства</small></div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="primary-button magnetic" href="#projects">Посмотреть проекты <span>↘</span></a>
+          <a class="secondary-button magnetic" href="mailto:rkoshelev2001@gmail.com">Написать на почту <span>↗</span></a>
+        </div>
+
+        <div class="hero-links" aria-label="Контакты">
+          <button id="copy-email" type="button"><span>EMAIL</span><strong>rkoshelev2001@gmail.com</strong><i>копировать</i></button>
+          <a href="https://github.com/Roma-jpg" target="_blank" rel="noreferrer"><span>GITHUB</span><strong>github.com/Roma-jpg</strong><i>открыть ↗</i></a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <article class="identity-card panel" id="identity-card" aria-label="Интерактивная карточка Кошелева Романа">
+          <div class="identity-topline">
+            <span>IDENTITY / KR-01</span>
+            <span class="machine-state">ONLINE</span>
+          </div>
+
+          <div class="identity-stage">
+            <div class="identity-grid" aria-hidden="true"></div>
+            <div class="identity-axis axis-x" aria-hidden="true"></div>
+            <div class="identity-axis axis-y" aria-hidden="true"></div>
+            <div class="identity-coordinates" aria-hidden="true"><span>55.7963 N</span><span>49.1088 E</span></div>
+
+            <div class="machine-core" id="machine-core">
+              <div class="core-rings" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div class="core-label"><strong>КР</strong><small>DRAG</small></div>
+            </div>
+
+            <svg class="signal-scope" viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true">
+              <path class="scope-grid" d="M0 25H600M0 50H600M0 75H600M0 100H600M0 125H600M100 0V150M200 0V150M300 0V150M400 0V150M500 0V150" />
+              <path class="scope-wave" d="M0 82 C32 82 35 82 48 82 C60 82 62 32 76 32 C91 32 92 116 108 116 C123 116 124 68 140 68 C155 68 158 82 176 82 H245 C261 82 266 44 281 44 C296 44 300 105 315 105 C330 105 334 70 351 70 C366 70 371 82 390 82 H455 C470 82 474 55 490 55 C507 55 510 98 527 98 C543 98 548 82 566 82 H600" />
+            </svg>
+          </div>
+
+          <div class="identity-nameplate">
+            <div><span>NAME</span><strong>КОШЕЛЕВ РОМАН</strong></div>
+            <div><span>PROFILE</span><strong>DEVELOPER / ENGINEER</strong></div>
+          </div>
+
+          <div class="machine-grid">
+            <div><span>FOCUS</span><strong>BUILDING</strong></div>
+            <div><span>RANGE</span><strong>CODE / HW / UX</strong></div>
+            <div><span>MODE</span><strong>PROTOTYPE</strong></div>
+            <div><span>UPTIME</span><strong id="uptime">00:00:00</strong></div>
+          </div>
+
+          <div class="identity-footline">
+            <span>MOVE CURSOR ANYWHERE</span>
+            <i></i>
+            <span>VIEWPORT TRACKING ACTIVE</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Области работы">
+      <div class="ticker-track">
+        <span>WEB INTERFACES</span><i>×</i><span>RUST TOOLS</span><i>×</i><span>EMBEDDED SYSTEMS</span><i>×</i><span>ESP32</span><i>×</i><span>AUTOMATION</span><i>×</i><span>HARDWARE PROTOTYPING</span><i>×</i>
+        <span>WEB INTERFACES</span><i>×</i><span>RUST TOOLS</span><i>×</i><span>EMBEDDED SYSTEMS</span><i>×</i><span>ESP32</span><i>×</i><span>AUTOMATION</span><i>×</i><span>HARDWARE PROTOTYPING</span><i>×</i>
+      </div>
+    </div>
+
+    <section class="projects shell" id="projects" aria-labelledby="projects-title">
+      <div class="projects-heading reveal">
+        <div>
+          <p class="kicker">SELECTED_WORK / 2026</p>
+          <h2 id="projects-title">Портфолио</h2>
+          <p>Проекты, которые лучше списка технологий показывают, что именно я умею собирать.</p>
+        </div>
+
+        <div class="project-controls" role="group" aria-label="Фильтр проектов">
+          <button class="filter-chip active" data-filter="all">все</button>
+          <button class="filter-chip" data-filter="hardware">железо</button>
+          <button class="filter-chip" data-filter="software">софт</button>
+          <button class="filter-chip" data-filter="flipper">flipper</button>
+        </div>
+      </div>
+
+      <div class="project-browser panel reveal">
+        <div class="project-list" id="project-list" aria-label="Список проектов"></div>
+        <div class="project-preview" id="project-preview" aria-live="polite"></div>
+      </div>
+
+      <div class="portfolio-contact panel reveal">
+        <div>
+          <span>CONTACT / DIRECT</span>
+          <h3>Есть задача на пересечении интерфейса, автоматизации и железа?</h3>
+        </div>
+        <div class="portfolio-contact-actions">
+          <a class="primary-button magnetic" href="mailto:rkoshelev2001@gmail.com">rkoshelev2001@gmail.com <span>↗</span></a>
+          <a class="secondary-button magnetic" href="https://github.com/Roma-jpg" target="_blank" rel="noreferrer">GitHub / Roma-jpg <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell">
+    <span>© <span id="year"></span> КОШЕЛЕВ РОМАН</span>
+    <span>HTML / CSS / JAVASCRIPT / NO FRAMEWORKS</span>
+    <button id="back-top" type="button">↑ наверх</button>
+  </footer>
+
+  <div class="terminal-modal" id="terminal-modal" role="dialog" aria-modal="true" aria-labelledby="terminal-title" hidden>
+    <div class="terminal-backdrop" data-close-terminal></div>
+    <section class="terminal-window panel">
+      <header class="terminal-header">
+        <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="terminal-title-wrap">
+          <strong id="terminal-title">ROMAN.CLI</strong>
+          <span id="terminal-subtitle">portfolio shell / ch 558</span>
+        </div>
+        <button class="terminal-close" data-close-terminal type="button" aria-label="Закрыть терминал">×</button>
+      </header>
+
+      <div class="terminal-layout">
+        <aside class="terminal-rail" aria-label="Быстрые команды">
+          <span>QUICK COMMANDS</span>
+          <button type="button" data-terminal-command="whoami">whoami</button>
+          <button type="button" data-terminal-command="work">work</button>
+          <button type="button" data-terminal-command="status">status</button>
+          <button type="button" data-terminal-command="contact">contact</button>
+          <button type="button" data-terminal-command="help">help</button>
+        </aside>
+
+        <div class="terminal-main">
+          <div class="terminal-output" id="terminal-output" aria-live="polite"></div>
+          <form class="terminal-form" id="terminal-form">
+            <label for="terminal-input"><span id="terminal-user">roman@portfolio</span>:<b id="terminal-path">~</b>$</label>
+            <input id="terminal-input" autocomplete="off" spellcheck="false" placeholder="введи команду" />
+            <button type="submit" aria-label="Выполнить команду">↵</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="terminal-statusbar">
+        <span id="terminal-mode-status"><i></i> ONLINE</span>
+        <span>↑↓ HISTORY</span>
+        <span>TAB AUTOCOMPLETE</span>
+        <span>ESC CLOSE</span>
+      </footer>
+
+      <section class="terminal-editor" id="terminal-editor" aria-label="Редактор nano" hidden>
+        <header>
+          <div><strong>GNU nano 8.0</strong><span id="terminal-editor-path">untitled</span></div>
+          <button id="terminal-editor-close" type="button" aria-label="Закрыть редактор">×</button>
+        </header>
+        <textarea id="terminal-editor-text" autocomplete="off" spellcheck="false" aria-label="Содержимое файла"></textarea>
+        <footer>
+          <span><kbd>Ctrl S</kbd> сохранить</span>
+          <span><kbd>Ctrl X</kbd> выйти</span>
+          <button id="terminal-editor-save" type="button">WRITE OUT</button>
+        </footer>
+      </section>
+
+      <section class="terminal-pager" id="terminal-pager" aria-label="Просмотр файла less" hidden>
+        <header>
+          <div><strong>LESS</strong><span id="terminal-pager-path">file</span></div>
+          <button id="terminal-pager-close" type="button" aria-label="Закрыть просмотр">×</button>
+        </header>
+        <pre id="terminal-pager-content" tabindex="0"></pre>
+        <footer><span>SCROLL / Q / ESC TO CLOSE</span></footer>
+      </section>
+    </section>
+  </div>
+
+  <div class="corruption-screen" id="corruption-screen" role="alert" aria-live="assertive" hidden>
+    <div class="corruption-primary">
+      <span class="corruption-cursor" aria-hidden="true"></span>
+      <h2>Filesystem corrupted, choose another boot drive.</h2>
+      <p id="corruption-countdown">AUTO-RECOVERY IN 10</p>
+      <pre id="corruption-noise"></pre>
+    </div>
+    <div class="recovery-panel" id="recovery-panel" hidden>
+      <div class="recovery-header"><span>ROMAN.OS RECOVERY ENVIRONMENT</span><b>JOURNAL MIRROR / ONLINE</b></div>
+      <div class="recovery-visual" aria-hidden="true">
+        <div class="recovery-drive"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="recovery-scan"></div>
+      </div>
+      <div class="recovery-log" id="recovery-log"></div>
+      <div class="recovery-track"><span id="recovery-progress"></span></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

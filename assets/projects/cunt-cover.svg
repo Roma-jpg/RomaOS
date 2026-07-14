@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b0e12"/><stop offset="1" stop-color="#11171b"/></linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#b8ff6a" stroke-opacity=".08"/></pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/><rect width="1200" height="720" fill="url(#grid)"/>
+  <g fill="none" stroke="#b8ff6a" stroke-opacity=".55">
+    <rect x="180" y="120" width="840" height="480" rx="34"/>
+    <rect x="260" y="195" width="360" height="230" rx="18"/>
+    <path d="M620 245h170m-170 55h270m-270 55h210M310 490h580"/>
+    <circle cx="860" cy="235" r="44"/><circle cx="860" cy="235" r="21"/>
+    <path d="M235 520h80m570 0h80M340 155v-60m520 60v-60"/>
+  </g>
+  <path d="M0 540h190c35 0 35-120 70-120s35 200 70 200 35-130 70-130 35 50 70 50h230c35 0 35-92 70-92s35 145 70 145 35-70 70-70 35 17 70 17h240" fill="none" stroke="#b8ff6a" stroke-width="4" filter="url(#glow)"/>
+  <g font-family="monospace"><text x="205" y="90" fill="#b8ff6a" font-size="22">CAN UTILITY aNd TOOL / ESP32-S3</text><text x="205" y="645" fill="#68717d" font-size="16">BUS MONITOR / LOGGER / INTERFACE</text><text x="700" y="270" fill="#edf3f7" font-size="54" font-weight="700">CUNT</text><text x="700" y="320" fill="#8b929e" font-size="18">ACTIVE BUILD / 2026</text></g>
+</svg>

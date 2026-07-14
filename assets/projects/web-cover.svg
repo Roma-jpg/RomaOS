@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#090b0f"/><stop offset="1" stop-color="#13171d"/></linearGradient><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#b8ff6a" stroke-opacity=".055"/></pattern></defs>
+  <rect width="1200" height="720" fill="url(#bg)"/><rect width="1200" height="720" fill="url(#grid)"/>
+  <g fill="none" stroke="#b8ff6a" stroke-opacity=".45">
+    <rect x="95" y="115" width="1010" height="490" rx="30"/><path d="M95 185h1010M380 185v420"/>
+    <rect x="140" y="235" width="190" height="65" rx="12"/><rect x="140" y="325" width="190" height="65" rx="12"/><rect x="140" y="415" width="190" height="65" rx="12"/>
+    <rect x="430" y="235" width="300" height="145" rx="16"/><rect x="760" y="235" width="295" height="145" rx="16"/><rect x="430" y="415" width="625" height="140" rx="16"/>
+    <path d="M470 515l75-40 70 20 90-80 100 55 90-120 120 70"/>
+  </g>
+  <g font-family="monospace"><text x="95" y="85" fill="#b8ff6a" font-size="22">THIS SITE / VANILLA WEB</text><text x="95" y="655" fill="#68717d" font-size="16">PORTFOLIO / VIRTUAL FS / TERMINAL</text><text x="455" y="305" fill="#edf3f7" font-size="38" font-weight="700">ROMEO.OS</text><text x="785" y="305" fill="#edf3f7" font-size="38" font-weight="700">UX</text></g>
+</svg>

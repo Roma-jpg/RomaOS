@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b0d11"/><stop offset="1" stop-color="#10151b"/></linearGradient><pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#fff" stroke-opacity=".035"/></pattern></defs>
+  <rect width="1200" height="720" fill="url(#bg)"/><rect width="1200" height="720" fill="url(#grid)"/>
+  <g font-family="monospace" fill="none" stroke="#b8ff6a" stroke-opacity=".55">
+    <rect x="105" y="270" width="220" height="120" rx="18"/><rect x="490" y="175" width="220" height="120" rx="18"/><rect x="490" y="425" width="220" height="120" rx="18"/><rect x="875" y="270" width="220" height="120" rx="18"/>
+    <path d="M325 330h100c45 0 20-95 65-95M325 330h100c45 0 20 155 65 155M710 235h80c45 0 40 95 85 95M710 485h80c45 0 40-155 85-155"/>
+  </g>
+  <g font-family="monospace"><text x="130" y="320" fill="#edf3f7" font-size="24">WATCHERS</text><text x="130" y="353" fill="#8b929e" font-size="16">process / time / file</text><text x="535" y="225" fill="#edf3f7" font-size="24">RULES</text><text x="535" y="258" fill="#8b929e" font-size="16">conditions</text><text x="528" y="475" fill="#edf3f7" font-size="24">STATE</text><text x="528" y="508" fill="#8b929e" font-size="16">json / events</text><text x="910" y="320" fill="#edf3f7" font-size="24">ACTIONS</text><text x="910" y="353" fill="#8b929e" font-size="16">execute / notify</text><text x="105" y="95" fill="#b8ff6a" font-size="22">ADVANCED SCHEDULER / RUST</text><text x="105" y="640" fill="#68717d" font-size="16">EVENT-DRIVEN AUTOMATION ENGINE</text></g>
+</svg>
