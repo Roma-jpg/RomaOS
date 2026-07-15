@@ -143,9 +143,9 @@ button { color: inherit; }
 .hero-role span { padding: 0 4px; color: var(--accent); }
 .hero h1 { margin: 0; }
 .hero-name { display: block; line-height: .72; letter-spacing: -.08em; }
-.hero-surname, .hero-firstname { display: block; font-weight: 950; }
+.hero-surname, .hero-firstname { display: block; font-weight: 950; line-height: .72; }
 .hero-surname { font-size: clamp(74px, 8.2vw, 132px); }
-.hero-firstname { margin-left: clamp(22px, 4vw, 66px); color: var(--accent); font-size: clamp(92px, 10.4vw, 170px); }
+.hero-firstname { margin: 4px 0 0 clamp(22px, 4vw, 66px); color: var(--accent); font-size: clamp(92px, 10.4vw, 170px); }
 .hero-statement { display: block; max-width: 820px; margin-top: 27px; font-size: clamp(33px, 3.75vw, 60px); font-weight: 720; line-height: 1.01; letter-spacing: -.055em; }
 .hero-statement .scramble { color: var(--accent); }
 .hero-intro { max-width: 760px; margin: 23px 0 0; color: #a5adb8; font-size: clamp(15px, 1.25vw, 18px); line-height: 1.68; }

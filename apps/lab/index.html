@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0d0b" />
+  <title>romeo558 - в работе</title>
+  <style>
+    :root { --bg: #0a0d0b; --white: #f4f8f3; --muted: #809086; --green: #6cff83; --line: rgba(244,248,243,.14); }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0; color: var(--white); background: var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .page { min-height: 100svh; position: relative; display: grid; place-items: center; overflow: hidden; padding: 72px 24px; }
+    .brand, .corner { position: absolute; font: 700 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .13em; }
+    .brand { top: 28px; left: clamp(24px, 4vw, 60px); color: var(--white); }
+    .brand span { color: var(--green); }
+    .corner { right: clamp(24px, 4vw, 60px); bottom: 28px; color: var(--muted); font-weight: 500; }
+    .line { position: absolute; width: 1px; height: 160px; background: linear-gradient(transparent, var(--line), transparent); }
+    .line.left { left: 9%; top: 13%; } .line.right { right: 11%; bottom: 12%; }
+    main { width: min(900px, 100%); display: grid; grid-template-columns: 1fr 390px; align-items: center; gap: clamp(44px, 9vw, 120px); }
+    .eyebrow { margin: 0 0 17px; color: var(--green); font: 700 11px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 500px; font-size: clamp(44px, 6.8vw, 76px); line-height: .95; letter-spacing: -.07em; font-weight: 650; }
+    p { max-width: 380px; margin: 25px 0 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+    .rule { display: flex; gap: 7px; align-items: center; margin-top: 34px; }
+    .rule i { display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+    .rule span { width: 140px; height: 1px; background: var(--line); }
+    .art { position: relative; width: min(390px, 80vw); aspect-ratio: 1; display: grid; place-items: center; }
+    .symbol { position: absolute; width: 17px; height: 17px; color: var(--green); opacity: .85; transform-origin: center; will-change: transform; }
+    .symbol svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .s1 { top: 10%; left: 12%; animation: spin 8s linear infinite, drift-one 5s ease-in-out infinite alternate; }
+    .s2 { top: 18%; right: 9%; animation: spin-reverse 13s linear infinite, drift-two 6.5s ease-in-out infinite alternate; }
+    .s3 { bottom: 12%; left: 12%; animation: spin 18s linear infinite, drift-one 7s ease-in-out infinite alternate-reverse; }
+    .s4 { right: 2%; bottom: 24%; animation: spin-reverse 10s linear infinite, drift-two 5.5s ease-in-out infinite alternate-reverse; }
+    .flask { width: 240px; filter: drop-shadow(0 14px 24px rgba(0,0,0,.28)); transform-origin: 50% 88%; animation: flask-sway 5.8s ease-in-out infinite; will-change: transform; }
+    .flask svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .liquid { transform-origin: 50% 70%; animation: liquid-sway 5.8s ease-in-out infinite; }
+    .wave-a { animation: wave-a 4.3s ease-in-out infinite alternate; }
+    .wave-b { animation: wave-b 6.2s ease-in-out infinite alternate-reverse; opacity: .24; }
+    .shine { animation: shine 3.8s ease-in-out infinite alternate; }
+
+    @keyframes spin { to { rotate: 360deg; } }
+    @keyframes spin-reverse { to { rotate: -360deg; } }
+    @keyframes drift-one { to { translate: 5px -7px; } }
+    @keyframes drift-two { to { translate: -6px 5px; } }
+    @keyframes flask-sway {
+      0%, 100% { transform: rotate(-2.2deg) translateY(1px); }
+      50% { transform: rotate(2.2deg) translateY(-3px); }
+    }
+    @keyframes liquid-sway {
+      0%, 100% { transform: rotate(1.8deg) translateY(1px); }
+      50% { transform: rotate(-1.8deg) translateY(-1px); }
+    }
+    @keyframes wave-a {
+      0% { transform: translateX(-12px) translateY(1px) scaleX(1.06); }
+      50% { transform: translateX(7px) translateY(-4px) scaleX(.98); }
+      100% { transform: translateX(14px) translateY(2px) scaleX(1.04); }
+    }
+    @keyframes wave-b {
+      0% { transform: translateX(18px) translateY(-2px) scaleX(.98); }
+      100% { transform: translateX(-18px) translateY(4px) scaleX(1.08); }
+    }
+    @keyframes shine {
+      to { opacity: .45; transform: translateX(8px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .symbol, .flask, .liquid, .wave-a, .wave-b, .shine { animation: none !important; }
+    }
+    @media (max-width: 720px) {
+      .page { padding: 76px 24px; }
+      main { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+      .copy { order: 2; } .art { order: 1; width: min(300px, 74vw); margin-inline: auto; }
+      p { margin-inline: auto; font-size: 14px; } .rule { justify-content: center; margin-top: 24px; }
+      h1 { font-size: clamp(43px, 12vw, 62px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="brand">ROMEO<span>558</span></div>
+    <div class="corner">SYSTEM / UNDER CONSTRUCTION</div>
+    <div class="line left"></div><div class="line right"></div>
+    <main>
+      <section class="copy">
+        <div class="eyebrow">[ status: rebuilding ]</div>
+        <h1>Сайт<br>в работе.</h1>
+        <p>Скоро тут появится обновлённая версия. Я уже собираю её по частям.</p>
+        <div class="rule"><i></i><span></span></div>
+      </section>
+      <section class="art" aria-label="Белая лабораторная колба с зелёной жидкостью">
+        <div class="symbol s1"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></div>
+        <div class="symbol s2"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></div>
+        <div class="symbol s3"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg></div>
+        <div class="symbol s4"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/><circle cx="12" cy="12" r="8"/></svg></div>
+        <div class="flask">
+          <svg viewBox="0 0 240 310" role="img" aria-hidden="true">
+            <defs>
+              <clipPath id="flaskClip"><path d="M94 28h52v89l68 128c12 23-4 43-30 43H56c-26 0-42-20-30-43l68-128V28Z"/></clipPath>
+              <linearGradient id="liquid" x1="0" x2="1"><stop stop-color="#28c963"/><stop offset=".55" stop-color="#6cff83"/><stop offset="1" stop-color="#22ba59"/></linearGradient>
+            </defs>
+            <path d="M86 28h68" fill="none" stroke="#f4f8f3" stroke-width="5" stroke-linecap="round"/>
+            <path d="M94 28h52v89l68 128c12 23-4 43-30 43H56c-26 0-42-20-30-43l68-128V28Z" fill="rgba(244,248,243,.035)" stroke="#f4f8f3" stroke-width="5" stroke-linejoin="round"/>
+            <g clip-path="url(#flaskClip)" class="liquid">
+              <g class="wave-a">
+                <path d="M-22 205c33-13 54 11 88 0 33-11 54 10 86 0 25-8 42-1 55 3 18 5 36 1 55-4v102H-24v-96c1-2 1-3 2-5Z" fill="url(#liquid)"/>
+                <path d="M-22 205c33-13 54 11 88 0 33-11 54 10 86 0 25-8 42-1 55 3 18 5 36 1 55-4" fill="none" stroke="#b7ffc5" stroke-width="3" opacity=".9"/>
+              </g>
+              <g class="wave-b">
+                <path d="M-28 211c30-9 52 8 82-1 32-10 55 8 87-2 29-9 51 8 80 1 17-4 32-4 51 1v96H-28Z" fill="#d3ffda"/>
+              </g>
+              <path class="shine" d="M69 225c9-4 18-4 28-1" fill="none" stroke="#effff1" stroke-width="3" stroke-linecap="round" opacity=".18"/>
+            </g>
+            <path d="M94 28h52v89" fill="none" stroke="#f4f8f3" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

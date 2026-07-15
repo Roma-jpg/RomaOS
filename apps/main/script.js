@@ -12,8 +12,8 @@ const CONFIG = {
       glyph: "C",
       type: "EMBEDDED / AUTOMOTIVE",
       year: "2026",
-      description: "Карманный CAN-инструмент на ESP32-S3: чтение шин, логирование, OLED-интерфейс, microSD и собственное управление. Проект строится как практический набор инструментов для исследования автомобильной электроники.",
-      proof: "Полная связка железа, firmware, интерфейса и работы с реальным протоколом в одном устройстве.",
+      description: "Небольшое устройство для просмотра данных, которыми обмениваются блоки в машине. Оно может сохранять их на карту памяти и показывать на маленьком экране.",
+      proof: "Сам собираю и программу, и электронику, чтобы всё работало как один прибор.",
       tags: ["ESP32-S3", "CAN", "C++", "OLED", "microSD"],
       status: "ACTIVE BUILD",
       images: [
@@ -29,8 +29,8 @@ const CONFIG = {
       glyph: "K",
       type: "FLIPPER ZERO / WORKFLOW",
       year: "2026",
-      description: "Связка приложений для Flipper Zero, которая считывает UID, передаёт данные в таблицу через HID и ускоряет повторяющиеся операции. Главная цель - убрать ручную рутину и сделать процесс наблюдаемым.",
-      proof: "Embedded-приложение, HID и таблица работают как единая система автоматизации.",
+      description: "Приложения для Flipper Zero, которые считывают номер ключа и сами заносят его в таблицу. Это убирает долгую ручную работу.",
+      proof: "Помогает быстро и без путаницы подготовить много ключей.",
       tags: ["Flipper Zero", "NFC", "HID", "C", "Automation"],
       status: "WORKING PROTOTYPE",
       images: [
@@ -46,8 +46,8 @@ const CONFIG = {
       glyph: "A",
       type: "WINDOWS / SYSTEM TOOL",
       year: "2026",
-      description: "Нативный планировщик на Rust, где автоматизация собирается из условий и действий: процессы, файлы, время, бездействие, запуск команд и управление системой. Не просто таймер, а небольшой движок правил.",
-      proof: "Архитектура из наблюдателей, условий и действий вместо набора жёстко прописанных сценариев.",
+      description: "Программа для Windows, которая сама выполняет действия по простым правилам. Например, может ждать файл, время или запуск другой программы.",
+      proof: "Вместо десятков отдельных таймеров - одно место для настройки автоматизации.",
       tags: ["Rust", "Windows", "JSON", "Automation", "Native"],
       status: "IN DEVELOPMENT",
       images: [
@@ -63,8 +63,8 @@ const CONFIG = {
       glyph: "O",
       type: "ESP32 / WEB INTERFACE",
       year: "2026",
-      description: "ESP32-S3 поднимает HTTP-сервер и превращает браузер в пульт рисования для SSD1306. Состояние отправляется на плату в реальном времени, а устройство отвечает звуком и анимацией.",
-      proof: "Браузер, сеть, firmware, дисплей и физическая обратная связь собраны в единый интерактивный продукт.",
+      description: "Рисовалка: рисуешь в браузере, и рисунок сразу появляется на маленьком экране устройства.",
+      proof: "Связал сайт и самодельное устройство так, чтобы они отвечали друг другу.",
       tags: ["ESP-IDF", "HTTP", "SSD1306", "JavaScript", "I2C"],
       status: "COMPLETE",
       images: [
@@ -80,8 +80,8 @@ const CONFIG = {
       glyph: "R",
       type: "WEB / PERSONAL PORTFOLIO",
       year: "2026",
-      description: "Этот сайт - самостоятельный проект на чистых HTML, CSS и JavaScript. Он объединяет адаптивную визитку, интерактивное портфолио, глобально отслеживающую курсор ID-карту и полноценную игрушечную Unix-среду внутри терминала.",
-      proof: "Показывает, как я проектирую нестандартный UX, собираю сложную клиентскую логику без фреймворков и довожу техническую идею до цельного продукта.",
+      description: "Моя интерактивная визитка. Здесь есть проекты, карточка, которая реагирует на курсор, и терминал с секретной мини-системой.",
+      proof: "Показывает, что я могу сделать сайт не просто страницей с текстом.",
       tags: ["HTML", "CSS", "JavaScript", "UX", "Virtual FS"],
       status: "LIVE",
       images: [
@@ -170,11 +170,11 @@ function t(key, values = {}) {
 }
 
 const englishProjects = {
-  cunt: { subtitle: "CAN Utility aNd Tool", description: "A pocket-sized CAN tool based on the ESP32-S3: bus reading, logging, an OLED interface, microSD and custom controls. The project is built as a practical toolkit for researching automotive electronics.", proof: "Hardware, firmware, interface design and work with a real protocol combined in one device.", type: "EMBEDDED / AUTOMOTIVE", status: "ACTIVE BUILD", alt: "CAN Utility aNd Tool interface concept" },
-  keyflow: { subtitle: "Key-workflow automation", description: "A pair of Flipper Zero apps that reads UIDs, sends data to a spreadsheet over HID and speeds up repetitive operations. The goal is to remove manual routine and make the process observable.", proof: "An embedded app, HID and a spreadsheet work together as one automation system.", type: "FLIPPER ZERO / WORKFLOW", status: "WORKING PROTOTYPE", alt: "Keyflow project visualization" },
-  scheduler: { subtitle: "Conditions, rules and actions", description: "A native Rust scheduler where automation is assembled from conditions and actions: processes, files, time, inactivity, command launches and system controls. Not just a timer, but a compact rules engine.", proof: "An architecture of watchers, conditions and actions instead of a set of hard-coded scenarios.", type: "WINDOWS / SYSTEM TOOL", status: "IN DEVELOPMENT", alt: "Advanced Scheduler rules-engine diagram" },
-  painter: { subtitle: "A browser that draws on a microcontroller", description: "The ESP32-S3 runs an HTTP server and turns a browser into a drawing controller for an SSD1306. State reaches the board in real time, while the device responds with sound and animation.", proof: "Browser, network, firmware, display and physical feedback combined into one interactive product.", type: "ESP32 / WEB INTERFACE", status: "COMPLETE", alt: "OLED Painter project interface" },
-  web: { title: "THIS SITE", subtitle: "Interactive portfolio and browser-based romeoOS", description: "This site is a standalone project built with plain HTML, CSS and JavaScript. It combines a responsive portfolio, interactive projects, a cursor-tracking ID card and a full toy Unix environment inside the terminal.", proof: "Shows how I design unconventional UX, build complex client-side logic without frameworks and take a technical idea to a cohesive product.", type: "WEB / PERSONAL PORTFOLIO", status: "LIVE", alt: "Koshelev Roman interactive portfolio website" }
+  cunt: { subtitle: "CAN Utility aNd Tool", description: "A small device for looking at the data shared by car modules. It can save it to a memory card and show it on a small screen.", proof: "I build both the software and the electronics so they work as one tool.", type: "EMBEDDED / AUTOMOTIVE", status: "ACTIVE BUILD", alt: "CAN Utility aNd Tool interface concept" },
+  keyflow: { subtitle: "Key-workflow automation", description: "Flipper Zero apps that read a key number and put it into a spreadsheet automatically. This removes long manual work.", proof: "Helps prepare many keys quickly and without mix-ups.", type: "FLIPPER ZERO / WORKFLOW", status: "WORKING PROTOTYPE", alt: "Keyflow project visualization" },
+  scheduler: { subtitle: "Conditions, rules and actions", description: "A Windows program that performs actions from simple rules. For example, it can wait for a file, a time or another program to start.", proof: "One place for automation instead of lots of separate timers.", type: "WINDOWS / SYSTEM TOOL", status: "IN DEVELOPMENT", alt: "Advanced Scheduler rules-engine diagram" },
+  painter: { subtitle: "A browser that draws on a microcontroller", description: "A drawing app: draw in the browser and the picture appears right away on the device's small screen.", proof: "A website and a homemade device react to each other.", type: "ESP32 / WEB INTERFACE", status: "COMPLETE", alt: "OLED Painter project interface" },
+  web: { title: "THIS SITE", subtitle: "Interactive portfolio and browser-based romeoOS", description: "My interactive portfolio. It has projects, a card that reacts to the cursor and a terminal with a secret mini-system.", proof: "Shows that I can make a website more than a page with text.", type: "WEB / PERSONAL PORTFOLIO", status: "LIVE", alt: "Koshelev Roman interactive portfolio website" }
 };
 
 function setText(selector, value) {
@@ -613,7 +613,7 @@ function makeDir(children = {}, mode = "drwxr-xr-x") {
 function createDefaultFS() {
   return makeDir({
     "welcome.txt": makeFile(t("welcomeFile")),
-    "available_commands.txt": makeFile("touch, mkdir, rm, nano, chmod, alias, env, find, grep, neofetch\n\nls, cd, pwd, cat, less, tree, find, grep, echo, clear, whoami, hostname, date, uptime, history, alias, env, export, which, file, stat, wc, head, tail\n\nping, nmap, cowsay, debug"),
+    "available_commands.txt": makeFile("touch, mkdir, rm, nano, chmod, alias, env, find, grep, neofetch\n\nls, cd, pwd, cat, less, tree, find, grep, echo, clear, whoami, hostname, date, uptime, history, alias, env, export, which, file, stat, wc, head, tail\n\nping, nmap, cowsay, debug\n\noperators: &&, |"),
     projects: makeDir({
       "cunt.txt": makeFile(t("cuntFile")), "keyflow.txt": makeFile(t("keyflowFile")), "oled.txt": makeFile(t("oledFile")), "scheduler.txt": makeFile(t("schedulerFile")), "this-site.txt": makeFile(t("siteFile"))
     }),
@@ -688,8 +688,14 @@ function saveAliases() {
 }
 
 let virtualFS = loadVirtualFS();
+let terminalMonitor = null;
 
 function appendTerminalLine(text, type = "") {
+  if (terminalMonitor) {
+    terminalMonitor.output.push(String(text ?? ""));
+    terminalMonitor.failed ||= type.split(/\s+/).includes("error");
+    if (terminalMonitor.capture) return null;
+  }
   const line = document.createElement("div");
   line.className = `terminal-line ${type}`.trim();
   line.textContent = String(text ?? "");
@@ -699,6 +705,10 @@ function appendTerminalLine(text, type = "") {
 }
 
 function appendTerminalBlock(title, body) {
+  if (terminalMonitor) {
+    terminalMonitor.output.push(`${title}\n${body}`);
+    if (terminalMonitor.capture) return;
+  }
   const block = document.createElement("div");
   block.className = "terminal-block";
   const heading = document.createElement("strong");
@@ -1298,6 +1308,7 @@ const filesystemCommands = {
       "SHELL / SYSTEM",
       "  clear  whoami  hostname  date  uptime  history  alias  env  export",
       "  which  neofetch  cowsay  ping  nmap  openweb  debug",
+      "  use && to run the next command after success; use | with grep, head, tail, wc, sort or uniq",
       "",
       "PORTFOLIO",
       "  open <project>    portfolio    exit    558"
@@ -1605,6 +1616,163 @@ function tokenizeCommand(value) {
   return tokens;
 }
 
+function parseShellOperators(value) {
+  const segments = [];
+  const operators = [];
+  let current = "";
+  let quote = null;
+  let escaped = false;
+
+  const pushSegment = operator => {
+    const segment = current.trim();
+    if (!segment) return { error: `shell: syntax error near unexpected token '${operator}'` };
+    segments.push(segment);
+    operators.push(operator);
+    current = "";
+    return null;
+  };
+
+  for (let index = 0; index < value.length; index += 1) {
+    const char = value[index];
+    if (escaped) {
+      current += char;
+      escaped = false;
+      continue;
+    }
+    if (char === "\\" && quote !== "'") {
+      current += char;
+      escaped = true;
+      continue;
+    }
+    if (quote) {
+      current += char;
+      if (char === quote) quote = null;
+      continue;
+    }
+    if (char === "\"" || char === "'") {
+      quote = char;
+      current += char;
+      continue;
+    }
+    if (char === "|" || (char === "&" && value[index + 1] === "&")) {
+      const operator = char === "|" ? "|" : "&&";
+      const problem = pushSegment(operator);
+      if (problem) return problem;
+      if (operator === "&&") index += 1;
+      continue;
+    }
+    current += char;
+  }
+
+  if (!operators.length) return null;
+  if (!current.trim()) return { error: `shell: syntax error near unexpected token '${operators.at(-1)}'` };
+  segments.push(current.trim());
+  return { segments, operators };
+}
+
+async function runMonitoredCommand(command, capture = false) {
+  const previousMonitor = terminalMonitor;
+  const monitor = { capture, failed: false, output: [] };
+  terminalMonitor = monitor;
+  try {
+    await executeTerminalCommand(command, { display: false, history: false, skipOperators: true });
+  } finally {
+    terminalMonitor = previousMonitor;
+  }
+  return monitor;
+}
+
+function filterPipelineInput(commandText, input) {
+  const tokens = tokenizeCommand(commandText);
+  const command = tokens.shift()?.toLowerCase() || "";
+  const args = tokens;
+  const lines = input ? input.split("\n") : [];
+
+  if (command === "cat" && !args.length) return { ok: true, output: input };
+  if (command === "sort") return { ok: true, output: lines.sort((left, right) => left.localeCompare(right)).join("\n") };
+  if (command === "uniq") return { ok: true, output: lines.filter((line, index) => index === 0 || line !== lines[index - 1]).join("\n") };
+
+  if (command === "grep") {
+    const flags = args.filter(arg => arg.startsWith("-"));
+    const values = args.filter(arg => !arg.startsWith("-"));
+    const pattern = values[0];
+    if (!pattern || values.length > 1) return { ok: false, output: "grep: pipeline usage: grep [-in] pattern" };
+    try {
+      const flagText = flags.join("");
+      const regex = new RegExp(pattern, flagText.includes("i") ? "i" : "");
+      const output = lines
+        .map((line, index) => ({ line, index: index + 1 }))
+        .filter(item => regex.test(item.line))
+        .map(item => flagText.includes("n") ? `${item.index}:${item.line}` : item.line)
+        .join("\n");
+      return { ok: true, output };
+    } catch (error) {
+      return { ok: false, output: `grep: ${error.message}` };
+    }
+  }
+
+  if (command === "head" || command === "tail") {
+    const { count, paths } = parseCountOption(args);
+    if (paths.length) return { ok: false, output: `${command}: pipeline usage: ${command} [-n N]` };
+    const selected = command === "head" ? lines.slice(0, count) : lines.slice(-count);
+    return { ok: true, output: selected.join("\n") };
+  }
+
+  if (command === "wc") {
+    const flags = args.filter(arg => arg.startsWith("-")).join("");
+    const otherArgs = args.filter(arg => !arg.startsWith("-"));
+    if (otherArgs.length) return { ok: false, output: "wc: pipeline usage: wc [-lwc]" };
+    const counts = [];
+    if (!flags || flags.includes("l")) counts.push((input.match(/\n/g) || []).length);
+    if (!flags || flags.includes("w")) counts.push(input.trim() ? input.trim().split(/\s+/).length : 0);
+    if (!flags || flags.includes("c")) counts.push(new Blob([input]).size);
+    return { ok: true, output: counts.join(" ") };
+  }
+
+  return { ok: false, output: `${command || "shell"}: cannot read pipeline input` };
+}
+
+async function executePipeline(stages) {
+  if (stages.length === 1) return runMonitoredCommand(stages[0]);
+
+  let result = await runMonitoredCommand(stages[0], true);
+  if (result.failed) {
+    appendTerminalLine(result.output.join("\n"), "error");
+    return result;
+  }
+
+  let output = result.output.join("\n");
+  for (const stage of stages.slice(1)) {
+    const filtered = filterPipelineInput(stage, output);
+    if (!filtered.ok) {
+      appendTerminalLine(filtered.output, "error");
+      return { failed: true, output: [filtered.output] };
+    }
+    output = filtered.output;
+  }
+
+  if (output) appendTerminalLine(output);
+  return { failed: false, output: output ? [output] : [] };
+}
+
+async function executeShellExpression(expression) {
+  let stages = [expression.segments[0]];
+  for (let index = 0; index < expression.operators.length; index += 1) {
+    const operator = expression.operators[index];
+    const nextSegment = expression.segments[index + 1];
+
+    if (operator === "|") {
+      stages.push(nextSegment);
+      continue;
+    }
+
+    const result = await executePipeline(stages);
+    if (result.failed) return;
+    stages = [nextSegment];
+  }
+  await executePipeline(stages);
+}
+
 function shellQuote(value) {
   return /\s/.test(value) ? `"${value.replace(/"/g, '\\"')}"` : value;
 }
@@ -1636,6 +1804,18 @@ async function executeTerminalCommand(rawValue, options = {}) {
     appendTerminalLine("rm: removing '/' ...", "error");
     triggerFilesystemCorruption(value);
     return;
+  }
+
+  if (!options.skipOperators) {
+    const expression = parseShellOperators(value);
+    if (expression?.error) {
+      appendTerminalLine(expression.error, "error");
+      return;
+    }
+    if (expression) {
+      await executeShellExpression(expression);
+      return;
+    }
   }
 
   const tokens = tokenizeCommand(value);

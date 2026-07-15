@@ -1,32 +1,17 @@
-# RomaOS Node
+# RomaOS sites
 
-Express wrapper for the RomaOS portfolio. The existing homepage is in `public/`.
+Static sites kept in one repository. Each directory under `apps/` is deployed as a separate Timeweb Cloud Frontend App.
 
-## Run locally
+| Domain | Timeweb project directory | Build directory |
+| --- | --- | --- |
+| `romeo558.ru` | `apps/main` | `.` |
+| `lab.romeo558.ru` | `apps/lab` | `.` |
+| `kcp.romeo558.ru` | `apps/kcp` | `.` |
 
-```bash
-npm install
-npm run dev
-```
+Choose `Frontend` and `HTML/CSS/JS` for all three applications. Leave the build command empty.
 
-Open `http://localhost:3000`.
+Do not deploy the repository root. The main application must use `apps/main` as its project directory. This ensures that `apps/lab` and `apps/kcp` are not copied into the main site's output, so paths such as `romeo558.ru/apps/lab/` and `romeo558.ru/apps/kcp/` return 404.
 
-## Add a page
+Each application can use the same repository and branch. Attach the matching domain in the application settings after checking its technical domain.
 
-Edit `src/config/pages.js` and add an object to `pages`:
-
-```js
-{
-  path: "/notes",
-  eyebrow: "NOTES / 02",
-  title: "Notes.",
-  text: ["Page content goes here."],
-  links: [{ href: "/", label: "Back to RomaOS" }]
-}
-```
-
-The generic view is `src/views/page.ejs`. Make a separate EJS view and route only when a page needs a different layout.
-
-## Timeweb Cloud
-
-Create an App Platform backend application, choose Express and Node.js 22, then use `npm start`. Set `PORT` through the panel if necessary. The health-check path is `/health`.
+To add another subdomain later, create another directory under `apps/` and deploy it as another Frontend App from the same repository.
