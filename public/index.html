@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#090b0f" />
-  <meta name="description" content="Кошелев Роман - разработчик и инженер. Web-интерфейсы, системные инструменты, автоматизация и embedded-прототипы." />
-  <meta property="og:title" content="Кошелев Роман - разработчик и инженер" />
-  <meta property="og:description" content="Интерфейсы, автоматизация, embedded-разработка и рабочие технические прототипы." />
+  <meta id="page-description" name="description" content="Кошелев Роман - разработчик и инженер. Web-интерфейсы, системные инструменты, автоматизация и embedded-прототипы." />
+  <meta id="og-title" property="og:title" content="Кошелев Роман - разработчик и инженер" />
+  <meta id="og-description" property="og:description" content="Интерфейсы, автоматизация, embedded-разработка и рабочие технические прототипы." />
   <meta property="og:type" content="website" />
-  <title>Кошелев Роман - разработчик и инженер</title>
+  <title id="page-title">Кошелев Роман - разработчик и инженер</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23090b0f'/%3E%3Cpath d='M16 15h21c8 0 13 5 13 12 0 5-3 9-8 11l10 11H39L29 39v10H16V15zm13 10v7h7c2 0 4-1 4-4s-2-3-4-3h-7z' fill='%23b8ff6a'/%3E%3C/svg%3E" />
   <script type="application/ld+json">
   {
@@ -70,27 +70,27 @@
             <span class="hero-surname">КОШЕЛЕВ</span>
             <span class="hero-firstname">РОМАН</span>
           </span>
-          <span class="hero-statement">Превращаю идеи в <span class="scramble" data-text="работающие системы">работающие системы</span>.</span>
+          <span class="hero-statement" id="hero-statement">Превращаю идеи в <span class="scramble" data-text="работающие системы">работающие системы</span>.</span>
         </h1>
 
-        <p class="hero-intro">
+        <p class="hero-intro" id="hero-intro">
           Проектирую web-интерфейсы, пишу системные инструменты и собираю embedded-прототипы. Соединяю код, железо и понятный UX в одном рабочем решении.
         </p>
 
         <div class="hero-proof" aria-label="Основные направления">
-          <div><span>01</span><strong>WEB & UI</strong><small>интерфейсы и визуализация</small></div>
-          <div><span>02</span><strong>SYSTEM TOOLS</strong><small>автоматизация и нативный софт</small></div>
-          <div><span>03</span><strong>EMBEDDED</strong><small>ESP32, протоколы и устройства</small></div>
+          <div><span>01</span><strong>WEB & UI</strong><small id="proof-web">интерфейсы и визуализация</small></div>
+          <div><span>02</span><strong>SYSTEM TOOLS</strong><small id="proof-tools">автоматизация и нативный софт</small></div>
+          <div><span>03</span><strong>EMBEDDED</strong><small id="proof-embedded">ESP32, протоколы и устройства</small></div>
         </div>
 
         <div class="hero-actions">
-          <a class="primary-button magnetic" href="#projects">Посмотреть проекты <span>↘</span></a>
-          <a class="secondary-button magnetic" href="mailto:rkoshelev2001@gmail.com">Написать на почту <span>↗</span></a>
+          <a class="primary-button magnetic" id="projects-link" href="#projects">Посмотреть проекты <span>↘</span></a>
+          <a class="secondary-button magnetic" id="email-link" href="mailto:rkoshelev2001@gmail.com">Написать на почту <span>↗</span></a>
         </div>
 
         <div class="hero-links" aria-label="Контакты">
-          <button id="copy-email" type="button"><span>EMAIL</span><strong>rkoshelev2001@gmail.com</strong><i>копировать</i></button>
-          <a href="https://github.com/Roma-jpg" target="_blank" rel="noreferrer"><span>GITHUB</span><strong>github.com/Roma-jpg</strong><i>открыть ↗</i></a>
+          <button id="copy-email" type="button"><span>EMAIL</span><strong>rkoshelev2001@gmail.com</strong><i id="copy-email-label">копировать</i></button>
+          <a href="https://github.com/Roma-jpg" target="_blank" rel="noreferrer"><span>GITHUB</span><strong>github.com/Roma-jpg</strong><i id="open-github-label">открыть ↗</i></a>
         </div>
       </div>
 
@@ -151,7 +151,7 @@
         <div>
           <p class="kicker">SELECTED_WORK / 2026</p>
           <h2 id="projects-title">Портфолио</h2>
-          <p>Проекты, которые лучше списка технологий показывают, что именно я умею собирать.</p>
+          <p id="projects-description">Проекты, которые лучше списка технологий показывают, что именно я умею собирать.</p>
         </div>
 
         <div class="project-controls" role="group" aria-label="Фильтр проектов">
@@ -170,7 +170,7 @@
       <div class="portfolio-contact panel reveal">
         <div>
           <span>CONTACT / DIRECT</span>
-          <h3>Есть задача на пересечении интерфейса, автоматизации и железа?</h3>
+          <h3 id="contact-heading">Есть задача на пересечении интерфейса, автоматизации и железа?</h3>
         </div>
         <div class="portfolio-contact-actions">
           <a class="primary-button magnetic" href="mailto:rkoshelev2001@gmail.com">rkoshelev2001@gmail.com <span>↗</span></a>
