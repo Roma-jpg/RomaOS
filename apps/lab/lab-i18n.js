@@ -15,12 +15,12 @@
 
   const strings = copy[locale] || copy.en;
   const telemetry = {
-    en: { pocket: ["GRAVITY X/Y", "VELOCITY", "IMPACT"], portal: ["BALL X/Y", "VELOCITY X/Y", "RADIUS", "LAST LINK", "TRANSFERS", "RATE"] },
-    ru: { pocket: ["ГРАВИТАЦИЯ X/Y", "СКОРОСТЬ", "УДАР"], portal: ["ШАР X/Y", "СКОРОСТЬ X/Y", "РАДИУС", "ПОСЛЕДНИЙ ПЕРЕХОД", "ПЕРЕНОСЫ", "ЧАСТОТА"] },
-    fr: { pocket: ["GRAVITÉ X/Y", "VITESSE", "IMPACT"], portal: ["BALLE X/Y", "VITESSE X/Y", "RAYON", "DERNIER LIEN", "TRANSFERTS", "TAUX"] },
-    it: { pocket: ["GRAVITÀ X/Y", "VELOCITÀ", "IMPATTO"], portal: ["PALLA X/Y", "VELOCITÀ X/Y", "RAGGIO", "ULTIMO COLLEGAMENTO", "TRASFERIMENTI", "TASSO"] },
-    es: { pocket: ["GRAVEDAD X/Y", "VELOCIDAD", "IMPACTO"], portal: ["PELOTA X/Y", "VELOCIDAD X/Y", "RADIO", "ÚLTIMO ENLACE", "TRANSFERENCIAS", "TASA"] },
-    kk: { pocket: ["ГРАВИТАЦИЯ X/Y", "ЖЫЛДАМДЫҚ", "СОҚҚЫ"], portal: ["ШАР X/Y", "ЖЫЛДАМДЫҚ X/Y", "РАДИУС", "СОҢҒЫ БАЙЛАНЫС", "ӨТУЛЕР", "ЖИІЛІК"] }
+    en: { pocket: ["GRAVITY X/Y", "VELOCITY", "IMPACT"], portal: ["BALL X/Y", "VELOCITY X/Y", "RADIUS", "LAST LINK", "TRANSFERS", "RATE"], coordinates: ["BLUE PORTAL", "ORANGE PORTAL"] },
+    ru: { pocket: ["ГРАВИТАЦИЯ X/Y", "СКОРОСТЬ", "УДАР"], portal: ["ШАР X/Y", "СКОРОСТЬ X/Y", "РАДИУС", "ПОСЛЕДНИЙ ПЕРЕХОД", "ПЕРЕНОСЫ", "ЧАСТОТА"], coordinates: ["СИНИЙ ПОРТАЛ", "ОРАНЖЕВЫЙ ПОРТАЛ"] },
+    fr: { pocket: ["GRAVITÉ X/Y", "VITESSE", "IMPACT"], portal: ["BALLE X/Y", "VITESSE X/Y", "RAYON", "DERNIER LIEN", "TRANSFERTS", "TAUX"], coordinates: ["PORTAIL BLEU", "PORTAIL ORANGE"] },
+    it: { pocket: ["GRAVITÀ X/Y", "VELOCITÀ", "IMPATTO"], portal: ["PALLA X/Y", "VELOCITÀ X/Y", "RAGGIO", "ULTIMO COLLEGAMENTO", "TRASFERIMENTI", "TASSO"], coordinates: ["PORTALE BLU", "PORTALE ARANCIONE"] },
+    es: { pocket: ["GRAVEDAD X/Y", "VELOCIDAD", "IMPACTO"], portal: ["PELOTA X/Y", "VELOCIDAD X/Y", "RADIO", "ÚLTIMO ENLACE", "TRANSFERENCIAS", "TASA"], coordinates: ["PORTAL AZUL", "PORTAL NARANJA"] },
+    kk: { pocket: ["ГРАВИТАЦИЯ X/Y", "ЖЫЛДАМДЫҚ", "СОҚҚЫ"], portal: ["ШАР X/Y", "ЖЫЛДАМДЫҚ X/Y", "РАДИУС", "СОҢҒЫ БАЙЛАНЫС", "ӨТУЛЕР", "ЖИІЛІК"], coordinates: ["КӨК ПОРТАЛ", "ҚЫЗҒЫЛТ САРЫ ПОРТАЛ"] }
   };
   const t = (key, values = {}) => (strings[key] || copy.en[key] || key).replace(/\{(\w+)\}/g, (_, name) => values[name] ?? `{${name}}`);
   window.romeoLab = { locale, t };
@@ -48,6 +48,9 @@
     });
     if (!portal) return;
     q('[data-action="reset-size"]').textContent = t("resetSize");
+    root.querySelectorAll(".portal-coordinates span").forEach((node, index) => {
+      node.textContent = telemetry[locale].coordinates[index];
+    });
     [["scale", "scale"], ["point-collision", "collision"], ["two-sided", "twoSided"]].forEach(([name, key]) => {
       const label = q(`[data-option="${name}"]`)?.closest("label");
       if (label?.lastChild) label.lastChild.nodeValue = `\n                  ${t(key)}\n                `;

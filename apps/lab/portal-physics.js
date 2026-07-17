@@ -116,6 +116,37 @@ class PortalPhysics extends HTMLElement {
               min-width: 0;
             }
 
+            .portal-coordinates {
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+              gap: 8px 16px;
+              min-width: 0;
+              color: var(--pp-muted);
+              font: 700 8px/1 ui-monospace, SFMono-Regular, Menlo,
+                Consolas, monospace;
+              letter-spacing: .08em;
+            }
+
+            .portal-coordinates > div {
+              display: flex;
+              align-items: baseline;
+              gap: 7px;
+            }
+
+            .portal-coordinates > div::before {
+              content: "";
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              background: currentColor;
+              box-shadow: 0 0 9px currentColor;
+            }
+
+            .portal-coordinates .blue { color: var(--pp-blue); }
+            .portal-coordinates .orange { color: var(--pp-orange); }
+            .portal-coordinates output { color: var(--pp-white); font-size: 9px; }
+
             .status {
               display: flex;
               align-items: center;
@@ -458,6 +489,17 @@ class PortalPhysics extends HTMLElement {
                 </div>
               </div>
 
+              <div class="portal-coordinates" aria-live="polite">
+                <div class="blue">
+                  <span>BLUE PORTAL</span>
+                  <output data-output="blue-coordinates">000 / 000</output>
+                </div>
+                <div class="orange">
+                  <span>ORANGE PORTAL</span>
+                  <output data-output="orange-coordinates">000 / 000</output>
+                </div>
+              </div>
+
               <div class="options">
                 <label class="toggle">
                   <input data-option="scale" type="checkbox">
@@ -500,6 +542,8 @@ class PortalPhysics extends HTMLElement {
         this.lastOutput = this.shadowRoot.querySelector('[data-output="last"]');
         this.transfersOutput = this.shadowRoot.querySelector('[data-output="transfers"]');
         this.rateOutput = this.shadowRoot.querySelector('[data-output="rate"]');
+        this.blueCoordinatesOutput = this.shadowRoot.querySelector('[data-output="blue-coordinates"]');
+        this.orangeCoordinatesOutput = this.shadowRoot.querySelector('[data-output="orange-coordinates"]');
 
         this.world = {
           width: 1,
@@ -556,6 +600,9 @@ class PortalPhysics extends HTMLElement {
         ];
 
         this.portalPointRadius = 7;
+        // Keep the handles easy to grab, but do not make their invisible
+        // physical hitboxes feel like large obstacles in the playfield.
+        this.portalColliderRadius = 2.5;
         this.transferCount = 0;
         this.lastTransferLabel = "NONE";
         this.transferTimes = [];
@@ -908,15 +955,7 @@ class PortalPhysics extends HTMLElement {
         this.deformation.velocity = 0;
         this.deformation.impact = 0;
 
-        this.portals[0].a.x = this.world.width * 0.20;
-        this.portals[0].a.y = this.world.height * 0.35;
-        this.portals[0].b.x = this.world.width * 0.24;
-        this.portals[0].b.y = this.world.height * 0.67;
-
-        this.portals[1].a.x = this.world.width * 0.70;
-        this.portals[1].a.y = this.world.height * 0.34;
-        this.portals[1].b.x = this.world.width * 0.82;
-        this.portals[1].b.y = this.world.height * 0.59;
+        this.placePortalsRandomly();
 
         this.portals[0].flash = 0;
         this.portals[1].flash = 0;
@@ -926,6 +965,122 @@ class PortalPhysics extends HTMLElement {
         this.transferTimes.length = 0;
         this.transferRate = 0;
         this.setClassicMove(false);
+      }
+
+      randomBetween(min, max) {
+        return min + Math.random() * Math.max(0, max - min);
+      }
+
+      setPortalFromCenter(portal, center, length, normalX, normalY) {
+        // The visible arrow follows the positive normal. The tangent below
+        // makes that arrow point from this portal to the other one.
+        const tangentX = normalY;
+        const tangentY = -normalX;
+        const halfLength = length * 0.5;
+
+        portal.a.x = center.x - tangentX * halfLength;
+        portal.a.y = center.y - tangentY * halfLength;
+        portal.b.x = center.x + tangentX * halfLength;
+        portal.b.y = center.y + tangentY * halfLength;
+      }
+
+      placePortalsRandomly() {
+        const minSide = Math.min(this.world.width, this.world.height);
+        const baseLength = this.clamp(minSide * 0.30, 138, 210);
+        const blueLength = this.clamp(
+          baseLength * this.randomBetween(0.90, 1.08),
+          128,
+          220
+        );
+        const orangeLength = this.clamp(
+          baseLength * this.randomBetween(0.90, 1.08),
+          128,
+          220
+        );
+        const edgePadding = Math.max(32, minSide * 0.055);
+        const maxHalfLength = Math.max(blueLength, orangeLength) * 0.5;
+        const margin = maxHalfLength + edgePadding;
+        const minDistance = Math.min(
+          minSide * 0.54,
+          Math.max(blueLength, orangeLength) + this.ball.radius * 2.5
+        );
+        const safeCenter = () => ({
+          x: this.randomBetween(margin, this.world.width - margin),
+          y: this.randomBetween(margin, this.world.height - margin)
+        });
+        let blueCenter = null;
+        let orangeCenter = null;
+
+        for (let attempt = 0; attempt < 36; attempt++) {
+          const candidateBlue = safeCenter();
+          const candidateOrange = safeCenter();
+          const separation = this.length(
+            candidateOrange.x - candidateBlue.x,
+            candidateOrange.y - candidateBlue.y
+          );
+          const blueBallDistance = this.length(
+            candidateBlue.x - this.ball.x,
+            candidateBlue.y - this.ball.y
+          );
+          const orangeBallDistance = this.length(
+            candidateOrange.x - this.ball.x,
+            candidateOrange.y - this.ball.y
+          );
+
+          if (
+            separation >= minDistance &&
+            blueBallDistance >= blueLength * 0.5 + this.ball.radius + 28 &&
+            orangeBallDistance >= orangeLength * 0.5 + this.ball.radius + 28
+          ) {
+            blueCenter = candidateBlue;
+            orangeCenter = candidateOrange;
+            break;
+          }
+        }
+
+        // A compact viewport can make the random constraints impossible.
+        // This fallback is still bounded, balanced, and inward-facing.
+        if (!blueCenter || !orangeCenter) {
+          blueCenter = {
+            x: this.world.width * 0.25,
+            y: this.world.height * 0.50
+          };
+          orangeCenter = {
+            x: this.world.width * 0.75,
+            y: this.world.height * 0.50
+          };
+        }
+
+        const directionX = orangeCenter.x - blueCenter.x;
+        const directionY = orangeCenter.y - blueCenter.y;
+        const directionLength = Math.max(
+          0.001,
+          this.length(directionX, directionY)
+        );
+        const normalX = directionX / directionLength;
+        const normalY = directionY / directionLength;
+
+        this.setPortalFromCenter(
+          this.portals[0],
+          blueCenter,
+          blueLength,
+          normalX,
+          normalY
+        );
+        this.setPortalFromCenter(
+          this.portals[1],
+          orangeCenter,
+          orangeLength,
+          -normalX,
+          -normalY
+        );
+      }
+
+      toGridCoordinate(x, y) {
+        return {
+          x: this.clamp(Math.round(x / this.world.width * 1000), 0, 1000),
+          y: this.clamp(Math.round(y / this.world.height * 1000), 0, 1000)
+        };
       }
 
       portalBasis(portal) {
@@ -1674,39 +1829,87 @@ class PortalPhysics extends HTMLElement {
       }
 
       resolvePortalPointCollisions(dt, hits) {
-        if (!this.settings.pointCollisions) return;
+        for (let index = 0; index < this.portals.length; index++) {
+          // A recognised portal crossing owns both surfaces until the ball
+          // has fully passed through. The frame must not kill that transit.
+          if (
+            this.transit.active &&
+            (index === this.transit.sourceIndex || index === this.transit.targetIndex)
+          ) {
+            continue;
+          }
 
-        const combinedRadius =
-          this.ball.radius +
-          this.portalPointRadius;
+          const portal = this.portals[index];
+          const basis = this.portalBasis(portal);
+          if (basis.length < 0.001) continue;
 
-        for (const portal of this.portals) {
-          for (const point of [portal.a, portal.b]) {
-            let dx = this.ball.x - point.x;
-            let dy = this.ball.y - point.y;
-            let distance = Math.hypot(dx, dy);
+          const along = this.dot(
+            this.ball.x - portal.a.x,
+            this.ball.y - portal.a.y,
+            basis.tx,
+            basis.ty
+          );
+          const clampedAlong = this.clamp(along, 0, basis.length);
+          const closestX = portal.a.x + basis.tx * clampedAlong;
+          const closestY = portal.a.y + basis.ty * clampedAlong;
+          let dx = this.ball.x - closestX;
+          let dy = this.ball.y - closestY;
+          let distance = Math.hypot(dx, dy);
+          const hitsStraightFrame =
+            clampedAlong > 0.001 &&
+            clampedAlong < basis.length - 0.001;
+          const collisionRadius = hitsStraightFrame
+            ? this.ball.radius
+            : this.ball.radius + this.portalColliderRadius;
 
-            if (distance >= combinedRadius) continue;
+          if (distance >= collisionRadius) continue;
+
+          let nx;
+          let ny;
+          if (hitsStraightFrame) {
+            // For a straight section, push toward the side the ball came
+            // from. That makes a missed entry bounce instead of ghosting
+            // through the visible portal line.
+            const previousDistance = this.signedDistanceToPortal(
+              this.ball.previousX,
+              this.ball.previousY,
+              portal,
+              basis
+            );
+            const side = previousDistance >= 0 ? 1 : -1;
+            nx = basis.nx * side;
+            ny = basis.ny * side;
+            distance = Math.abs(
+              this.signedDistanceToPortal(
+                this.ball.x,
+                this.ball.y,
+                portal,
+                basis
+              )
+            );
+          } else {
+            // The checkbox affects only the two endpoint colliders. The
+            // portal surface itself stays solid for missed entries.
+            if (!this.settings.pointCollisions) continue;
 
             if (distance < 0.0001) {
-              const angle = Math.random() * Math.PI * 2;
-              dx = Math.cos(angle);
-              dy = Math.sin(angle);
-              distance = 1;
+            const angle = Math.random() * Math.PI * 2;
+            nx = Math.cos(angle);
+            ny = Math.sin(angle);
+            distance = 0;
+            } else {
+              nx = dx / distance;
+              ny = dy / distance;
             }
-
-            const nx = dx / distance;
-            const ny = dy / distance;
-            const penetration = combinedRadius - distance;
-
-            this.applyCollision(
-              nx,
-              ny,
-              penetration,
-              dt,
-              hits
-            );
           }
+
+          this.applyCollision(
+            nx,
+            ny,
+            collisionRadius - distance,
+            dt,
+            hits
+          );
         }
       }
 
@@ -1771,7 +1974,12 @@ class PortalPhysics extends HTMLElement {
       }
 
       portalOpeningClearance(radius = this.ball.radius) {
-        return radius + this.portalPointRadius + 1;
+        return radius + this.portalColliderRadius + 1;
+      }
+
+      portalFrameClearance(radius = this.ball.radius) {
+        return this.portalColliderRadius +
+          Math.min(radius * 0.25, 12) + 2;
       }
 
       portalScaleFor(sourceBasis, targetBasis) {
@@ -1930,25 +2138,6 @@ class PortalPhysics extends HTMLElement {
           ? [1, -1]
           : [1];
 
-        const along = this.dot(
-          this.ball.x - portal.a.x,
-          this.ball.y - portal.a.y,
-          sourceBasis.tx,
-          sourceBasis.ty
-        );
-
-        const u = along / sourceBasis.length;
-        const targetAlong = u * targetBasis.length;
-
-        if (
-          along <= sourceClearance ||
-          along >= sourceBasis.length - sourceClearance ||
-          targetAlong <= targetClearance ||
-          targetAlong >= targetBasis.length - targetClearance
-        ) {
-          return null;
-        }
-
         for (const entrySide of sides) {
           const previousSigned =
             previousDistance * entrySide;
@@ -1964,10 +2153,51 @@ class PortalPhysics extends HTMLElement {
             Отрицательная доступна только в TWO-SIDED и отмечена контурной.
           */
           if (
-            previousSigned <= 0 ||
+            previousSigned <= this.ball.radius ||
             signedDistance > this.ball.radius ||
-            signedDistance < -this.ball.radius ||
             signedVelocity >= -8
+          ) {
+            continue;
+          }
+
+          // Find the leading edge on the entire path. This handles a fast
+          // ball or a fast pointer drag that crosses the portal between two
+          // normal physics samples.
+          const distanceDelta = previousSigned - signedDistance;
+          if (distanceDelta <= 0.0001) continue;
+
+          const crossingT = this.clamp(
+            (previousSigned - this.ball.radius) / distanceDelta,
+            0,
+            1
+          );
+          const crossingX = this.lerp(
+            this.ball.previousX,
+            this.ball.x,
+            crossingT
+          );
+          const crossingY = this.lerp(
+            this.ball.previousY,
+            this.ball.y,
+            crossingT
+          );
+          const along = this.dot(
+            crossingX - portal.a.x,
+            crossingY - portal.a.y,
+            sourceBasis.tx,
+            sourceBasis.ty
+          );
+          const u = along / sourceBasis.length;
+          const targetAlong = u * targetBasis.length;
+          const frameClearance = this.portalFrameClearance(
+            Math.max(this.ball.radius, scale.radius)
+          );
+
+          if (
+            along <= frameClearance ||
+            along >= sourceBasis.length - frameClearance ||
+            targetAlong <= frameClearance ||
+            targetAlong >= targetBasis.length - frameClearance
           ) {
             continue;
           }
@@ -2075,28 +2305,11 @@ class PortalPhysics extends HTMLElement {
         const signedDistance =
           distance * entrySide;
 
-        const along = this.dot(
-          this.ball.x - source.a.x,
-          this.ball.y - source.a.y,
-          sourceBasis.tx,
-          sourceBasis.ty
-        );
-
-        const u = along / sourceBasis.length;
-        const targetAlong = u * targetBasis.length;
-
         /*
-          Если портал двинули из-под шара или шар полностью вернулся назад,
-          транзит просто прекращается. Никакой отдельной обработки
-          пересечений порталов здесь намеренно нет.
+          After a swept entry is accepted, sideways velocity must not erase
+          the visible half of the ball. Only backing fully out cancels it.
         */
-        if (
-          along <= sourceClearance ||
-          along >= sourceBasis.length - sourceClearance ||
-          targetAlong <= targetClearance ||
-          targetAlong >= targetBasis.length - targetClearance ||
-          signedDistance > this.ball.radius + 1
-        ) {
+        if (signedDistance > this.ball.radius + 1) {
           this.cancelPortalTransit();
           return false;
         }
@@ -2266,29 +2479,27 @@ class PortalPhysics extends HTMLElement {
         ctx.strokeStyle = "rgba(244, 248, 243, .028)";
         ctx.lineWidth = 1;
 
-        const size = 42;
+        const divisions = 10;
 
-        for (
-          let x = size;
-          x < this.world.width;
-          x += size
-        ) {
+        for (let index = 1; index < divisions; index++) {
+          const x = this.world.width * index / divisions;
           ctx.beginPath();
           ctx.moveTo(x + 0.5, 0);
           ctx.lineTo(x + 0.5, this.world.height);
           ctx.stroke();
         }
 
-        for (
-          let y = size;
-          y < this.world.height;
-          y += size
-        ) {
+        for (let index = 1; index < divisions; index++) {
+          const y = this.world.height * index / divisions;
           ctx.beginPath();
           ctx.moveTo(0, y + 0.5);
           ctx.lineTo(this.world.width, y + 0.5);
           ctx.stroke();
         }
+
+        ctx.fillStyle = "rgba(244, 248, 243, .16)";
+        ctx.font = "700 8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+        ctx.fillText("GRID 1000 × 1000", 10, 15);
 
         ctx.restore();
       }
@@ -2769,6 +2980,35 @@ class PortalPhysics extends HTMLElement {
         this.ctx.restore();
       }
 
+      drawMotionBlur() {
+        if (this.ball.dragging || this.transit.active) return;
+
+        const speed = this.length(this.ball.vx, this.ball.vy);
+        if (speed < 90) return;
+
+        const directionX = this.ball.vx / speed;
+        const directionY = this.ball.vy / speed;
+        const trailLength = this.clamp(speed * 0.018, 9, this.ball.radius * 1.1);
+        const { ctx } = this;
+
+        ctx.save();
+        for (let index = 1; index <= 4; index++) {
+          const amount = index / 4;
+          ctx.globalAlpha = (1 - amount) * 0.055;
+          ctx.beginPath();
+          ctx.arc(
+            this.ball.x - directionX * trailLength * amount,
+            this.ball.y - directionY * trailLength * amount,
+            this.ball.radius * (1 - amount * 0.10),
+            0,
+            Math.PI * 2
+          );
+          ctx.fillStyle = "#e9343d";
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
       draw() {
         this.ctx.clearRect(
           0,
@@ -2779,6 +3019,7 @@ class PortalPhysics extends HTMLElement {
 
         this.drawBackgroundGrid();
         this.drawGravityMarker();
+        this.drawMotionBlur();
         this.drawSplitBall();
 
         /*
@@ -2810,6 +3051,19 @@ class PortalPhysics extends HTMLElement {
 
         this.rateOutput.value =
           `${this.transferRate.toFixed(1)} /s`;
+
+        const blueCenter = {
+          x: (this.portals[0].a.x + this.portals[0].b.x) * 0.5,
+          y: (this.portals[0].a.y + this.portals[0].b.y) * 0.5
+        };
+        const orangeCenter = {
+          x: (this.portals[1].a.x + this.portals[1].b.x) * 0.5,
+          y: (this.portals[1].a.y + this.portals[1].b.y) * 0.5
+        };
+        const blueGrid = this.toGridCoordinate(blueCenter.x, blueCenter.y);
+        const orangeGrid = this.toGridCoordinate(orangeCenter.x, orangeCenter.y);
+        this.blueCoordinatesOutput.value = `${blueGrid.x} / ${blueGrid.y}`;
+        this.orangeCoordinatesOutput.value = `${orangeGrid.x} / ${orangeGrid.y}`;
       }
 
       frame(now) {
