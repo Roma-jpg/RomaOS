@@ -20,7 +20,7 @@
     </div>
     <div class="lab-header-state" aria-live="polite">
       <span data-current-name>RUBBER PHYSICS</span>
-      <span data-current-index>01 / 02</span>
+      <span data-current-index>01 / 04</span>
     </div>
   </header>
 
@@ -48,6 +48,28 @@
         >
           <portal-physics></portal-physics>
         </section>
+
+        <section
+          class="experiment"
+          data-title-key="lineWaves"
+          data-title="LINE WAVES"
+          aria-label="Interactive Line Waves WebGL effect"
+          aria-hidden="true"
+          inert
+        >
+          <line-waves-lab></line-waves-lab>
+        </section>
+
+        <section
+          class="experiment"
+          data-title-key="faultyTerminal"
+          data-title="FAULTY TERMINAL"
+          aria-label="Interactive Faulty Terminal WebGL effect"
+          aria-hidden="true"
+          inert
+        >
+          <faulty-terminal-lab></faulty-terminal-lab>
+        </section>
       </div>
     </div>
   </main>
@@ -64,7 +86,7 @@
     <div class="feed-position" aria-hidden="true">
       <strong data-feed-current>01</strong>
       <span>/</span>
-      <span data-feed-total>02</span>
+      <span data-feed-total>04</span>
     </div>
 
     <div class="feed-dots" data-feed-dots aria-label="Experiment list"></div>
@@ -83,6 +105,8 @@
 
   <script src="pocket-physics.js"></script>
   <script src="portal-physics.js"></script>
+  <script src="line-waves-lab.js"></script>
+  <script src="faulty-terminal-lab.js"></script>
   <script src="lab-i18n.js"></script>
   <script src="lab-navigation.js"></script>
 </body>

@@ -17,6 +17,7 @@
       let wheelDelta = 0;
       let wheelResetTimer = 0;
       let lastWheelNavigation = 0;
+      let lastButtonNavigation = 0;
       let touchStart = null;
 
       const pad = value => String(value).padStart(2, "0");
@@ -36,7 +37,13 @@
           simulation &&
           typeof simulation.setSimulationActive === "function"
         ) {
-          simulation.setSimulationActive(active && !document.hidden);
+          try {
+            simulation.setSimulationActive(active && !document.hidden);
+          } catch (error) {
+            // A broken experiment must never prevent the feed controls from
+            // switching to another card.
+            console.error("Experiment state update error:", error);
+          }
         }
       }
 
@@ -101,7 +108,9 @@
         headerIndexNode.textContent = `${current} / ${totalText}`;
 
         previousButton.disabled = activeIndex === 0;
-        nextButton.disabled = activeIndex === total - 1;
+        // Нижняя стрелка работает как непрерывная лента: после последнего
+        // эксперимента возвращает к первому, а не выглядит сломанной.
+        nextButton.disabled = false;
 
         if (announce) {
           announcerNode.textContent = i18n.t("experiment", {
@@ -124,11 +133,48 @@
       }
 
       function move(direction) {
+        if (direction > 0 && activeIndex === experiments.length - 1) {
+          showExperiment(0);
+          return;
+        }
+
         showExperiment(activeIndex + direction);
       }
 
-      previousButton.addEventListener("click", () => move(-1));
-      nextButton.addEventListener("click", () => move(1));
+      function moveFromButton(direction) {
+        const now = performance.now();
+        if (now - lastButtonNavigation < 180) return;
+
+        lastButtonNavigation = now;
+        move(direction);
+      }
+
+      function bindNavigationButton(button, direction) {
+        let handledPointerTap = false;
+
+        button.addEventListener("pointerup", event => {
+          if (event.pointerType === "mouse") return;
+
+          event.preventDefault();
+          handledPointerTap = true;
+          moveFromButton(direction);
+          window.setTimeout(() => {
+            handledPointerTap = false;
+          }, 250);
+        });
+
+        button.addEventListener("click", () => {
+          if (handledPointerTap) {
+            handledPointerTap = false;
+            return;
+          }
+
+          moveFromButton(direction);
+        });
+      }
+
+      bindNavigationButton(previousButton, -1);
+      bindNavigationButton(nextButton, 1);
 
       window.addEventListener("keydown", event => {
         const path = event.composedPath();
