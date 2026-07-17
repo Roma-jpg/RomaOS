@@ -87,6 +87,25 @@ const CONFIG = {
       images: [
         { src: "assets/projects/web-cover.svg", alt: "Интерактивный сайт-портфолио Кошелева Романа" }
       ]
+    },
+    {
+      id: "lab",
+      number: "06",
+      category: "software",
+      title: "HTML LAB",
+      subtitle: "Интерактивные эксперименты с физикой",
+      glyph: "L",
+      type: "WEB / INTERACTIVE EXPERIMENTS",
+      year: "2026",
+      description: "Отдельная лаборатория с интерактивными физическими сценами: резиновым шаром, порталами, датчиками движения и управлением с клавиатуры или тача.",
+      proof: "Показывает, как я собираю сложное поведение в понятный браузерный интерфейс.",
+      tags: ["Canvas", "Physics", "Web Components", "Touch", "JavaScript"],
+      status: "LIVE",
+      url: "https://lab.romeo558.ru/",
+      cta: "ОТКРЫТЬ ЛАБОРАТОРИЮ ↗",
+      images: [
+        { src: "assets/projects/lab-cover.svg", alt: "Интерактивная HTML-лаборатория Romeo558" }
+      ]
     }
   ]
 };
@@ -174,7 +193,8 @@ const englishProjects = {
   keyflow: { subtitle: "Key-workflow automation", description: "Flipper Zero apps that read a key number and put it into a spreadsheet automatically. This removes long manual work.", proof: "Helps prepare many keys quickly and without mix-ups.", type: "FLIPPER ZERO / WORKFLOW", status: "WORKING PROTOTYPE", alt: "Keyflow project visualization" },
   scheduler: { subtitle: "Conditions, rules and actions", description: "A Windows program that performs actions from simple rules. For example, it can wait for a file, a time or another program to start.", proof: "One place for automation instead of lots of separate timers.", type: "WINDOWS / SYSTEM TOOL", status: "IN DEVELOPMENT", alt: "Advanced Scheduler rules-engine diagram" },
   painter: { subtitle: "A browser that draws on a microcontroller", description: "A drawing app: draw in the browser and the picture appears right away on the device's small screen.", proof: "A website and a homemade device react to each other.", type: "ESP32 / WEB INTERFACE", status: "COMPLETE", alt: "OLED Painter project interface" },
-  web: { title: "THIS SITE", subtitle: "Interactive portfolio and browser-based romeoOS", description: "My interactive portfolio. It has projects, a card that reacts to the cursor and a terminal with a secret mini-system.", proof: "Shows that I can make a website more than a page with text.", type: "WEB / PERSONAL PORTFOLIO", status: "LIVE", alt: "Koshelev Roman interactive portfolio website" }
+  web: { title: "THIS SITE", subtitle: "Interactive portfolio and browser-based romeoOS", description: "My interactive portfolio. It has projects, a card that reacts to the cursor and a terminal with a secret mini-system.", proof: "Shows that I can make a website more than a page with text.", type: "WEB / PERSONAL PORTFOLIO", status: "LIVE", alt: "Koshelev Roman interactive portfolio website" },
+  lab: { title: "HTML LAB", subtitle: "Interactive physics experiments", description: "A separate laboratory with interactive physics scenes: a rubber ball, portals, motion sensors, and keyboard or touch controls.", proof: "Shows how I turn complex behaviour into a clear browser interface.", type: "WEB / INTERACTIVE EXPERIMENTS", status: "LIVE", cta: "OPEN LAB ↗", alt: "Romeo558 interactive HTML laboratory" }
 };
 
 function setText(selector, value) {
@@ -183,10 +203,10 @@ function setText(selector, value) {
 }
 
 const EXTRA_SITE_COPY = {
-  fr: { portfolio: "Portfolio", email: "E-mail", terminal: "Terminal", statement: "Je transforme les idées en <span class=\"scramble\" data-text=\"systèmes fonctionnels\">systèmes fonctionnels</span>.", intro: "Je conçois des interfaces web, des outils système et des prototypes embarqués. Je réunis code, matériel et UX dans une solution concrète.", projects: "Voir les projets", mail: "Envoyer un e-mail", copy: "copier", open: "ouvrir ↗", projectDescription: "Des projets qui montrent mieux qu'une liste de technologies ce que je sais construire.", all: "tous", hardware: "matériel", software: "logiciel", contact: "Un projet à la croisée de l'interface, de l'automatisation et du matériel ?", top: "↑ retour en haut" },
-  it: { portfolio: "Portfolio", email: "E-mail", terminal: "Terminale", statement: "Trasformo le idee in <span class=\"scramble\" data-text=\"sistemi funzionanti\">sistemi funzionanti</span>.", intro: "Progetto interfacce web, strumenti di sistema e prototipi embedded. Unisco codice, hardware e UX in una soluzione concreta.", projects: "Vedi progetti", mail: "Invia un'e-mail", copy: "copia", open: "apri ↗", projectDescription: "Progetti che mostrano meglio di un elenco di tecnologie ciò che so costruire.", all: "tutti", hardware: "hardware", software: "software", contact: "Hai un progetto tra interfaccia, automazione e hardware?", top: "↑ torna su" },
-  es: { portfolio: "Portafolio", email: "Correo", terminal: "Terminal", statement: "Convierto ideas en <span class=\"scramble\" data-text=\"sistemas que funcionan\">sistemas que funcionan</span>.", intro: "Diseño interfaces web, herramientas de sistema y prototipos embebidos. Uno código, hardware y UX en una solución práctica.", projects: "Ver proyectos", mail: "Enviar correo", copy: "copiar", open: "abrir ↗", projectDescription: "Proyectos que muestran mejor que una lista de tecnologías lo que sé construir.", all: "todos", hardware: "hardware", software: "software", contact: "¿Tienes una tarea entre interfaz, automatización y hardware?", top: "↑ volver arriba" },
-  kk: { portfolio: "Портфолио", email: "Пошта", terminal: "Терминал", statement: "Идеяларды <span class=\"scramble\" data-text=\"жұмыс істейтін жүйелерге\">жұмыс істейтін жүйелерге</span> айналдырамын.", intro: "Веб-интерфейстерді жобалаймын, жүйелік құралдар мен embedded прототиптер жасаймын. Кодты, темірді және UX-ті бір практикалық шешімге біріктіремін.", projects: "Жобаларды көру", mail: "Поштаға жазу", copy: "көшіру", open: "ашу ↗", projectDescription: "Технологиялар тізімінен гөрі нені жасай алатынымды жақсы көрсететін жобалар.", all: "барлығы", hardware: "жабдық", software: "софт", contact: "Интерфейс, автоматтандыру және жабдық қиылысындағы міндет бар ма?", top: "↑ жоғары" }
+  fr: { portfolio: "Portfolio", email: "E-mail", terminal: "Terminal", statement: "Je transforme les idées en <span class=\"scramble\" data-text=\"systèmes fonctionnels\">systèmes fonctionnels</span>.", intro: "Je conçois des interfaces web, des outils système et des prototypes embarqués. Je réunis code, matériel et UX dans une solution concrète.", projects: "Voir les projets", mail: "Envoyer un e-mail", copy: "copier", open: "ouvrir ↗", projectDescription: "Des projets qui montrent mieux qu'une liste de technologies ce que je sais construire.", all: "tous", hardware: "matériel", software: "logiciel", contact: "Un projet à la croisée de l'interface, de l'automatisation et du matériel ?", top: "↑ retour en haut", labCta: "OUVRIR LE LABO ↗" },
+  it: { portfolio: "Portfolio", email: "E-mail", terminal: "Terminale", statement: "Trasformo le idee in <span class=\"scramble\" data-text=\"sistemi funzionanti\">sistemi funzionanti</span>.", intro: "Progetto interfacce web, strumenti di sistema e prototipi embedded. Unisco codice, hardware e UX in una soluzione concreta.", projects: "Vedi progetti", mail: "Invia un'e-mail", copy: "copia", open: "apri ↗", projectDescription: "Progetti che mostrano meglio di un elenco di tecnologie ciò che so costruire.", all: "tutti", hardware: "hardware", software: "software", contact: "Hai un progetto tra interfaccia, automazione e hardware?", top: "↑ torna su", labCta: "APRI IL LAB ↗" },
+  es: { portfolio: "Portafolio", email: "Correo", terminal: "Terminal", statement: "Convierto ideas en <span class=\"scramble\" data-text=\"sistemas que funcionan\">sistemas que funcionan</span>.", intro: "Diseño interfaces web, herramientas de sistema y prototipos embebidos. Uno código, hardware y UX en una solución práctica.", projects: "Ver proyectos", mail: "Enviar correo", copy: "copiar", open: "abrir ↗", projectDescription: "Proyectos que muestran mejor que una lista de tecnologías lo que sé construir.", all: "todos", hardware: "hardware", software: "software", contact: "¿Tienes una tarea entre interfaz, automatización y hardware?", top: "↑ volver arriba", labCta: "ABRIR EL LAB ↗" },
+  kk: { portfolio: "Портфолио", email: "Пошта", terminal: "Терминал", statement: "Идеяларды <span class=\"scramble\" data-text=\"жұмыс істейтін жүйелерге\">жұмыс істейтін жүйелерге</span> айналдырамын.", intro: "Веб-интерфейстерді жобалаймын, жүйелік құралдар мен embedded прототиптер жасаймын. Кодты, темірді және UX-ті бір практикалық шешімге біріктіремін.", projects: "Жобаларды көру", mail: "Поштаға жазу", copy: "көшіру", open: "ашу ↗", projectDescription: "Технологиялар тізімінен гөрі нені жасай алатынымды жақсы көрсететін жобалар.", all: "барлығы", hardware: "жабдық", software: "софт", contact: "Интерфейс, автоматтандыру және жабдық қиылысындағы міндет бар ма?", top: "↑ жоғары", labCta: "ЗЕРТХАНАНЫ АШУ ↗" }
 };
 
 function localizeVisibleSite() {
@@ -258,6 +278,8 @@ function localizeVisibleSite() {
 
   const extra = EXTRA_SITE_COPY[siteLanguage];
   if (!extra) return;
+  const labProject = CONFIG.projects.find(project => project.id === "lab");
+  if (labProject && extra.labCta) labProject.cta = extra.labCta;
   setText(".top-nav a[href='#projects']", extra.portfolio);
   setText(".top-nav a[href^='mailto']", extra.email);
   setText("#open-terminal span:last-child", extra.terminal);
@@ -531,6 +553,7 @@ function selectProject(id, rerender = true) {
       <div class="preview-footer">
         <div class="preview-tags">${project.tags.map(tag => `<span>${tag}</span>`).join("")}</div>
         <div class="preview-status"><span>${siteLanguage === "en" ? "STATUS" : "СТАТУС"}</span><b>${project.status}</b></div>
+        ${project.url ? `<a class="project-visit-link" href="${project.url}" target="_blank" rel="noreferrer">${project.cta || "OPEN ↗"}</a>` : ""}
       </div>
     </article>
   `;
@@ -1051,6 +1074,10 @@ function openProjectFromTerminal(id) {
     return;
   }
   appendTerminalLine(t("projectOpen", { name: project.title }), "success");
+  if (project.url) {
+    setTimeout(() => window.open(project.url, "_blank", "noopener"), 260);
+    return;
+  }
   selectProject(project.id);
   setTimeout(() => {
     closeTerminal();
